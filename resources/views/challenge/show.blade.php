@@ -16,13 +16,13 @@
                                 <li class="list-group-item d-flex justify-content-between">
                                     <strong>{{ $book->name }}</strong>
                                     @if($book->isCompleted())
-                                        Completed
+                                    <span class="text-success">Completed</span>
                                     @else
                                     <div>
                                         <form action="/books/complete/{{ $book->id }}" method="PATCH">
                                             @csrf
                                             @method('PATCH')
-                                            <button type="submit" class="btn btn-outline-success">Complete</button>
+                                            <button type="submit" class="btn btn-outline-primary">Complete</button>
                                         </form>
                                     </div>
                                     @endif

@@ -22,7 +22,7 @@
                                         <i class="fas fa-check"></i>
                                         @endif
                                     </p>
-                                    <small>Progress: {{ $challenge->books->where('completed_at', '!=', null)->count() .'/'. $challenge->books->count()}}</small>
+                                    <small>Progress: {{ $challenge->books->where('completed_at', '!=', null)->count() .' out of '. $challenge->books->count() . ' books completed'}}</small>
                                 </div>
 
                                 <div>
