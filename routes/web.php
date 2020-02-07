@@ -25,3 +25,6 @@ Route::delete('/challenges/{challenge}', 'ChallengeController@destroy');
 
 /** Books */
 Route::get('/books/complete/{book}', 'BookController@complete');
+
+/** Profile */
+Route::get('/profile/{user}', 'ProfileController@profile');

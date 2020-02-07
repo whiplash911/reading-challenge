@@ -5,9 +5,8 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card mt-4">
-                    <div class="card-header d-flex justify-content-between">
+                    <div class="card-header">
                         <strong>{{ $challenge->name }}</strong>
-                        <a href="/challenges" class="btn btn-primary">Back</a>
                     </div>
 
                     <div class="card-body">
@@ -31,17 +30,18 @@
                         </ul>
                     </div>
 
-                    <div class="card-footer">
+                    <div class="card-footer d-flex justify-content-between">
                     @if($challenge->isCompleted())
-                        The challenge was completed on {{ $challenge->completed_at }}. Congratulations!
+                        <p>The challenge was completed on {{ $challenge->completed_at }}. Congratulations!</p>
                     @else
                         <form action="/challenges/{{ $challenge->id }}" method="post">
                             @csrf
                             @method('DELETE')
 
-                            <button class="btn btn-small btn-outline-danger" type="submit">Delete Challenge</button>
+                            <button class="btn btn-small btn-outline-danger" type="submit" onclick="return confirm('Are you sure you want to delete the challenge?')">Delete Challenge</button>
                         </form>
                     @endif
+                        <a href="/challenges" class="btn btn-primary">Back</a>
                     </div>
                 </div>
             </div>

@@ -83,7 +83,7 @@ class ChallengePolicy
     /**
      * Determine whether the user can permanently delete the challenge.
      *
-     * @param  \App\User  $user
+     * @param  \App\User       $user
      * @param  \App\Challenge  $challenge
      * @return mixed
      */

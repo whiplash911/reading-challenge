@@ -73,6 +73,10 @@
                             <button type="submit" class="btn btn-primary">Create Challenge</button>
                         </form>
                     </div>
+
+                    <div class="card-footer">
+                        <a href="/challenges" class="btn btn-primary">Back</a>
+                    </div>
                 </div>
             </div>
         </div>

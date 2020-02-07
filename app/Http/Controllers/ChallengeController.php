@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Challenge;
-use App\Events\ChallengeCreated;
+use App\Services\ChallengeService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class ChallengeController extends Controller
@@ -20,7 +21,7 @@ class ChallengeController extends Controller
      */
     public function index()
     {
-        $challenges = auth()->user()->challenges()->get();
+        $challenges = auth()->user()->challenges()->orderBy('created_at', 'desc')->get();
 
         return view('challenge.index', compact('challenges'));
     }
@@ -36,20 +37,18 @@ class ChallengeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param Request          $request
+     * @param ChallengeService $challengeService
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(Request $request, ChallengeService $challengeService)
     {
         $data = $request->validate([
             'challenge.name' => 'required',
             'books.*.name'   => 'required',
         ]);
 
-        $challenge = auth()->user()->challenges()->create($data['challenge']);
-        $challenge->books()->createMany($data['books']);
-
-        event(new ChallengeCreated($challenge));
+        $challenge = $challengeService->create($data);
 
         return redirect('/challenges/'.$challenge->id);
     }
@@ -97,16 +96,21 @@ class ChallengeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Challenge $challenge
+     * @param Challenge        $challenge
+     * @param ChallengeService $challengeService
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
-    public function destroy(Challenge $challenge)
+    public function destroy(Challenge $challenge, ChallengeService $challengeService)
     {
-        $this->authorize('delete');
+        $this->authorize('delete', $challenge);
 
-        $challenge->books()->delete();
-        $challenge->delete();
+        try {
+            $challengeService->delete($challenge);
+            Session::flash('success', 'The challenge was successfully deleted');
+        } catch (\Throwable $e) {
+            Session::flash('error', 'An error occurred when deleting your challenge. Please try again.');
+        }
 
         return redirect('/challenges');
     }

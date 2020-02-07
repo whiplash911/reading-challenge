@@ -17,7 +17,7 @@
 
             @if(!empty($feed))
                 <div class="my-3">
-                    <h1>User Activity</h1>
+                    <h3>User Activity</h3>
                     @foreach($feed as $feedItem)
                         {{ $feedItem->feedable->render() }}
                     @endforeach
