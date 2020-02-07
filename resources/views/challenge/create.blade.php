@@ -4,6 +4,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+
+                {{ Breadcrumbs::render('challenges_create') }}
+
                 <div class="card">
                     <div class="card-header">Create new Challenge</div>
 
@@ -72,10 +75,6 @@
 
                             <button type="submit" class="btn btn-primary">Create Challenge</button>
                         </form>
-                    </div>
-
-                    <div class="card-footer">
-                        <a href="/challenges" class="btn btn-primary">Back</a>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,8 @@
             <div class="col-md-8">
                 @include('layouts.alerts')
 
+                {{ Breadcrumbs::render('challenges') }}
+
                 <div class="card mt-4">
                     <div class="card-header">
                         <strong>Your challenges</strong>
@@ -40,10 +42,6 @@
                             <p>You don't have any Challenges yet, lets create one!</p>
                         </div>
                     @endif
-                    </div>
-
-                    <div class="card-footer">
-                        <a href="/" class="btn btn-primary">Back</a>
                     </div>
                 </div>
             </div>

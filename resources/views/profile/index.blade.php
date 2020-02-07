@@ -4,6 +4,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+
+                {{ Breadcrumbs::render('profile', $user) }}
+
                 <h5>{{ $user->name }}'s profile</h5>
                 <div class="card mt-4">
                     <div class="card-header">

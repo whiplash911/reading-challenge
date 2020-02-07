@@ -4,6 +4,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+
+                {{ Breadcrumbs::render('challenges_show', $challenge) }}
+
                 <div class="card mt-4">
                     <div class="card-header">
                         <strong>{{ $challenge->name }}</strong>
@@ -41,7 +44,6 @@
                             <button class="btn btn-small btn-outline-danger" type="submit" onclick="return confirm('Are you sure you want to delete the challenge?')">Delete Challenge</button>
                         </form>
                     @endif
-                        <a href="/challenges" class="btn btn-primary">Back</a>
                     </div>
                 </div>
             </div>

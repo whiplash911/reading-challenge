@@ -12,19 +12,18 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/home', 'HomeController@index');
 
 Auth::routes();
 
 /** Challenges */
-Route::get('/challenges', 'ChallengeController@index');
-Route::get('/challenges/create', 'ChallengeController@create');
+Route::get('/challenges', 'ChallengeController@index')->name('challenges');
+Route::get('/challenges/create', 'ChallengeController@create')->name('challenges_create');
+Route::get('/challenges/{challenge}', 'ChallengeController@show')->name('challenges_show');
 Route::post('/challenges', 'ChallengeController@store');
-Route::get('/challenges/{challenge}', 'ChallengeController@show');
 Route::delete('/challenges/{challenge}', 'ChallengeController@destroy');
 
 /** Books */
-Route::get('/books/complete/{book}', 'BookController@complete');
+Route::patch('/books/complete/{book}', 'BookController@complete');
 
 /** Profile */
-Route::get('/profile/{user}', 'ProfileController@profile');
+Route::get('/profile/{user}', 'ProfileController@profile')->name('profile');
