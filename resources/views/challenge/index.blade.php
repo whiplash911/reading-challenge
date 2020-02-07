@@ -7,10 +7,14 @@
                 <div class="card mt-4">
                     <div class="card-header d-flex justify-content-between">
                         <strong>Your challenges</strong>
-                        <a href="/home" class="btn btn-primary">Back</a>
+
                     </div>
 
                     <div class="card-body">
+                        <div class="d-flex justify-content-between my-2">
+                            <a href="/challenges/create" class="btn btn-success">Create new Challenge</a>
+                            <a href="/" class="btn btn-primary">Back</a>
+                        </div>
                     @if($challenges->count() > 0)
                         <ul class="list-group">
                         @foreach($challenges as $challenge)
@@ -34,13 +38,8 @@
                     @else
                         <div>
                             <p>You don't have any Challenges yet, lets create one!</p>
-                            <a href="/challenges/create" class="btn btn-success">Create new Challenge</a>
                         </div>
                     @endif
-                    </div>
-
-                    <div class="card-footer">
-                        <a href="/challenges/create" class="btn btn-success">Create new Challenge</a>
                     </div>
                 </div>
             </div>

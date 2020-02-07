@@ -14,6 +14,16 @@
                     </div>
                 </div>
             </div>
+
+            @if(!empty($feed))
+                <div class="my-3">
+                    <h1>User Activity</h1>
+                    @foreach($feed as $feedItem)
+                        {{ $feedItem->feedable->render() }}
+                    @endforeach
+                </div>
+            @endif
+
         </div>
     </div>
 </div>

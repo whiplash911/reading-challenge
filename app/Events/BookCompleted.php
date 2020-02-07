@@ -15,6 +15,8 @@ class BookCompleted
 {
     use Dispatchable, SerializesModels;
 
+    const NAME = 'book-completed';
+
     /**
      * @var Book
      */

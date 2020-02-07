@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Challenge;
+use App\Events\ChallengeCreated;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -11,7 +12,6 @@ class ChallengeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-       // $this->authorizeResource(Challenge::class);
     }
     /**
      * Display a listing of the resource.
@@ -48,6 +48,8 @@ class ChallengeController extends Controller
 
         $challenge = auth()->user()->challenges()->create($data['challenge']);
         $challenge->books()->createMany($data['books']);
+
+        event(new ChallengeCreated($challenge));
 
         return redirect('/challenges/'.$challenge->id);
     }
@@ -101,6 +103,8 @@ class ChallengeController extends Controller
      */
     public function destroy(Challenge $challenge)
     {
+        $this->authorize('delete');
+
         $challenge->books()->delete();
         $challenge->delete();
 

@@ -4,7 +4,7 @@ namespace App\Listeners\Book;
 
 use App\Events\BookCompleted;
 
-class CompleteChallenge
+class AddToFeed
 {
     /**
      * Create the event listener.
@@ -26,9 +26,13 @@ class CompleteChallenge
     public function handle(BookCompleted $event)
     {
         $challenge = $event->challenge;
+        $book = $event->book;
 
-        if ($challenge->books->where('completed_at', '==', null)->count() === 0) { // If all books are completed
-            $challenge->complete();
+        if ($challenge->isPublic()) {
+            $book->feed()->create([
+                'user_id' => $challenge->user->id,
+                'event' => BookCompleted::NAME
+            ]);
         }
     }
 }

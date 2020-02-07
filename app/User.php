@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Challenge::class);
     }
+
+    public function feeds()
+    {
+        return $this->hasMany(Feed::class);
+    }
 }

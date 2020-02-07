@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class Book
  * @package App
  */
-class Book extends Model
+class Book extends Model implements Feedable
 {
     /**
      * @var array
@@ -22,6 +22,11 @@ class Book extends Model
     public function challenge()
     {
         return $this->belongsTo(Challenge::class);
+    }
+
+    public function feed()
+    {
+        return $this->morphOne(Feed::class, 'feedable');
     }
 
     /**
@@ -42,5 +47,12 @@ class Book extends Model
     public function isCompleted()
     {
         return $this->completed_at !== null;
+    }
+
+    public function render()
+    {
+        $book = $this;
+
+        return view("feed.book.{$book->feed->event}", compact('book'));
     }
 }
